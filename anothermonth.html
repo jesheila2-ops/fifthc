@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To More Months With You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    background-color: #8B1A1A;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.55) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    font-family: Georgia, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    z-index: 2;
+    position: relative;
+}
+
+.photo-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.polaroid {
+    background: white;
+    padding: 10px 10px 40px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    border-radius: 3px;
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.polaroid img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.p1 { transform: rotate(-4deg); }
+.p2 { transform: rotate(-2deg); }
+.p3 { transform: rotate(2deg); }
+.p4 { transform: rotate(4deg); }
+
+.deco-heart {
+    position: absolute;
+    top: 12%;
+    left: 5%;
+    font-size: 2.5rem;
+    z-index: 1;
+    opacity: 0.85;
+}
+
+.deco-star {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    font-size: 1.8rem;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+.deco-snoopy {
+    position: absolute;
+    bottom: 8%;
+    right: 4%;
+    font-size: 7rem;
+    z-index: 3;
+    line-height: 1;
+}
+
+.nav {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    z-index: 2;
+    position: relative;
+}
+
+.back-btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1rem;
+    background: #fdf6e4;
+    color: #6b1424;
+    transition: .3s;
+}
+
+.back-btn:hover { transform: translateY(-2px); }
+
+@media (max-width: 768px) {
+    body {
+        justify-content: flex-start;
+        padding: 20px 16px 80px;
+        overflow-y: auto;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 24px;
+        margin-top: 20px;
+    }
+
+    .photo-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .polaroid {
+        width: 100%;
+        padding: 6px 6px 28px;
+        flex-shrink: 1;
+    }
+
+    .polaroid img {
+        height: 130px;
+    }
+
+    .p1, .p2, .p3, .p4 {
+        transform: none;
+    }
+
+    .deco-heart {
+        font-size: 1.6rem;
+        top: 6%;
+        left: 2%;
+    }
+
+    .deco-star {
+        font-size: 1.2rem;
+        top: 4%;
+        left: 5%;
+    }
+
+    .deco-snoopy {
+        font-size: 3rem;
+        right: 2%;
+        bottom: 2%;
+    }
+
+    .nav {
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .back-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 420px) {
+    h1 { font-size: 1.5rem; }
+
+    .photo-row {
+        max-width: 300px;
+        gap: 8px;
+    }
+
+    .polaroid img { height: 110px; }
+    .deco-snoopy { font-size: 2.2rem; }
+}
+
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.4);
+    background: rgba(74,13,24,.75);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: transform .2s;
+    backdrop-filter: blur(4px);
+}
+.music-btn:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<div class="deco-star">⭐</div>
+<div class="deco-heart">❤️</div>
+<div class="deco-snoopy">🐶</div>
+
+<h1>To More Months With You ♥</h1>
+
+<div class="photo-row">
+    <div class="polaroid p1">
+        <img src="another1.png" alt="">
+    </div>
+    <div class="polaroid p2">
+        <img src="another2.png" alt="">
+    </div>
+    <div class="polaroid p3">
+        <img src="another3.png" alt="">
+    </div>
+    <div class="polaroid p4">
+        <img src="another4.png" alt="">
+    </div>
+</div>
+
+<div class="nav">
+    <button class="back-btn" onclick="window.location.href='reasons.html'">← Back</button>
+    <button class="back-btn" onclick="window.location.href='songforyou.html'">Next →</button>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="tahanan.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn" title="Toggle music">♪</button>
+
+<script>
+const music = document.getElementById('bgMusic');
+const btn = document.getElementById('musicBtn');
+music.volume = 0.4;
+let playing = false;
+
+const savedTime = parseFloat(sessionStorage.getItem('musicTime') || '0');
+const wasPaused = sessionStorage.getItem('musicPaused') === 'true';
+music.currentTime = savedTime;
+
+window.addEventListener('pagehide', () => {
+    sessionStorage.setItem('musicTime', music.currentTime);
+    sessionStorage.setItem('musicPaused', !playing);
+});
+
+if (!wasPaused) {
+    music.play().then(() => {
+        playing = true;
+        btn.textContent = '♪';
+    }).catch(() => {
+        document.addEventListener('click', function startMusic() {
+            music.play();
+            playing = true;
+            btn.textContent = '♪';
+        }, { once: true });
+    });
+}
+
+btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (playing) {
+        music.pause();
+        playing = false;
+        btn.textContent = '♩';
+    } else {
+        music.play();
+        playing = true;
+        btn.textContent = '♪';
+    }
+});
+</script>
+
+</body>
+</html>

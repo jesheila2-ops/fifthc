@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Song For You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    background-color: #8B1A1A;
+    font-family: Georgia, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    color: rgba(255, 220, 150, 0.7);
+    font-size: 1.1rem;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.2rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 36px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    z-index: 2;
+    position: relative;
+}
+
+.tablet-frame {
+    position: relative;
+    z-index: 2;
+    background: #a82020;
+    border-radius: 28px;
+    padding: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.25);
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,0.15),
+        0 16px 48px rgba(0,0,0,0.5);
+    width: min(640px, 90vw);
+}
+
+.tablet-screen {
+    border-radius: 14px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16/9;
+    width: 100%;
+}
+
+.tablet-screen iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.deco-flower {
+    position: absolute;
+    bottom: 12%;
+    left: 4%;
+    font-size: 5rem;
+    z-index: 3;
+    transform: rotate(-15deg);
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.4));
+    pointer-events: none;
+}
+
+.nav {
+    display: flex;
+    gap: 40px;
+    margin-top: 36px;
+    z-index: 2;
+    position: relative;
+}
+
+.back-btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1rem;
+    background: #fdf6e4;
+    color: #6b1424;
+    transition: .3s;
+}
+
+.back-btn:hover { transform: translateY(-2px); }
+
+@media (max-width: 768px) {
+    body {
+        justify-content: flex-start;
+        padding: 30px 16px 80px;
+        overflow-y: auto;
+    }
+
+    h1 { font-size: 2rem; margin-bottom: 24px; }
+
+    .tablet-frame {
+        border-radius: 18px;
+        padding: 12px;
+        width: 95vw;
+    }
+
+    .deco-flower {
+        font-size: 2rem;
+        bottom: auto;
+        top: 4%;
+        left: 2%;
+    }
+
+    .nav {
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .back-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.4);
+    background: rgba(74,13,24,.75);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: transform .2s;
+    backdrop-filter: blur(4px);
+}
+.music-btn:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="deco-flower">🌺🌺</div>
+
+<h1>Song for you</h1>
+
+<div class="tablet-frame">
+    <div class="tablet-screen">
+        <iframe
+            src="https://www.youtube.com/embed/KA0qGkoKarQ?rel=0"
+            title="Song for you"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+<div class="nav">
+    <button class="back-btn" onclick="window.location.href='anothermonth.html'">← Back</button>
+    <button class="back-btn" onclick="window.location.href='finalpage.html'">Next →</button>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="tahanan.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn" title="Toggle music">♪</button>
+
+<script>
+    // Scatter stars
+    const container = document.getElementById('stars');
+    for (let i = 0; i < 55; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.textContent = '✦';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.fontSize = (0.7 + Math.random() * 0.9) + 'rem';
+        star.style.opacity = 0.4 + Math.random() * 0.5;
+        star.style.transform = `rotate(${Math.random() * 360}deg)`;
+        container.appendChild(star);
+    }
+
+    // Music
+    const music = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicBtn');
+    music.volume = 0.4;
+    let playing = false;
+
+    const savedTime = parseFloat(sessionStorage.getItem('musicTime') || '0');
+    const wasPaused = sessionStorage.getItem('musicPaused') === 'true';
+    music.currentTime = savedTime;
+
+    window.addEventListener('pagehide', () => {
+        sessionStorage.setItem('musicTime', music.currentTime);
+        sessionStorage.setItem('musicPaused', !playing);
+    });
+
+    if (!wasPaused) {
+        music.play().then(() => {
+            playing = true;
+            btn.textContent = '♪';
+        }).catch(() => {
+            document.addEventListener('click', function startMusic() {
+                music.play();
+                playing = true;
+                btn.textContent = '♪';
+            }, { once: true });
+        });
+    }
+
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (playing) {
+            music.pause();
+            playing = false;
+            btn.textContent = '♩';
+        } else {
+            music.play();
+            playing = true;
+            btn.textContent = '♪';
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Monthsary, My Love!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fifth.css">
+</head>
+<body>
+
+<div class="scene" id="scene">
+
+  <h1 class="title">You got a mail!</h1>
+
+  <div class="envelope-wrap" id="envelope" title="Click to open">
+    <svg class="envelope-svg" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="var(--envelope-light)"/>
+          <stop offset="100%" stop-color="var(--envelope-dark)"/>
+        </linearGradient>
+        <linearGradient id="flapGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#a8202c"/>
+          <stop offset="100%" stop-color="var(--envelope-dark)"/>
+        </linearGradient>
+        <radialGradient id="goldGrad" cx="35%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="var(--gold-light)"/>
+          <stop offset="55%" stop-color="var(--gold-mid)"/>
+          <stop offset="100%" stop-color="var(--gold-dark)"/>
+        </radialGradient>
+      </defs>
+
+      <!-- envelope body -->
+      <rect x="6" y="6" width="388" height="248" rx="6" fill="url(#bodyGrad)" stroke="var(--envelope-edge)" stroke-width="3"/>
+
+      <!-- back flap fold lines (top flap closed, apex at seal) -->
+      <polygon points="6,6 200,150 394,6" fill="url(#flapGrad)" stroke="var(--envelope-edge)" stroke-width="2.5" opacity="0.9"/>
+
+      <!-- bottom-left corner fold accent -->
+      <polygon points="6,254 100,254 6,190" fill="var(--envelope-edge)" opacity="0.35"/>
+      <!-- bottom-right corner fold accent -->
+      <polygon points="394,254 300,254 394,190" fill="var(--envelope-edge)" opacity="0.35"/>
+
+      <!-- wax seal -->
+      <g class="seal">
+        <circle cx="200" cy="150" r="42" fill="url(#goldGrad)" stroke="var(--gold-dark)" stroke-width="2"/>
+        <circle cx="200" cy="150" r="42" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"/>
+        <!-- drip texture -->
+        <circle cx="160" cy="178" r="6" fill="var(--gold-mid)"/>
+        <circle cx="238" cy="120" r="5" fill="var(--gold-light)" opacity="0.6"/>
+        <!-- engraved sprig emblem -->
+        <g stroke="#6b4612" stroke-width="2.4" fill="none" stroke-linecap="round">
+          <path d="M200 130 L200 172"/>
+          <path d="M200 138 C190 134 184 126 184 118"/>
+          <path d="M200 138 C210 134 216 126 216 118"/>
+          <path d="M200 150 C192 147 187 140 187 133"/>
+          <path d="M200 150 C208 147 213 140 213 133"/>
+          <path d="M200 162 C194 160 190 155 190 149"/>
+          <path d="M200 162 C206 160 210 155 210 149"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+</div>
+
+<script src="fifth.js"></script>
+</body>
+</html>

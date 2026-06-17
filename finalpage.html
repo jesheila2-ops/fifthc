@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Monthsary</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    overflow: hidden;
+    position: relative;
+}
+
+.bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+}
+
+.bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    object-position: center 20%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(80, 10, 10, 0.45);
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: white;
+    text-shadow:
+        2px 2px 12px rgba(0,0,0,0.6),
+        0 0 40px rgba(200,50,50,0.4);
+    line-height: 1.3;
+    margin-top: 180px; /* remove this */
+    animation: fadeIn 2s ease forwards;
+}
+
+.back-btn {
+    margin-top: 50px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1rem;
+    background: #fdf6e4;
+    color: #6b1424;
+    transition: .3s;
+    animation: fadeIn 2s ease 1s forwards;
+    opacity: 0;
+}
+
+.back-btn:hover { transform: translateY(-2px); }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+        margin-top: 0; /* no push on mobile */
+    }
+
+    .back-btn {
+        margin-top: 30px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.4);
+    background: rgba(74,13,24,.75);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: transform .2s;
+    backdrop-filter: blur(4px);
+}
+.music-btn:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<div class="bg">
+    <img src="finalbg.jpg" alt="">
+</div>
+
+<div class="overlay"></div>
+
+<div class="content">
+    <h1>Happy Monthsary,<br>My love!</h1>
+    <button class="back-btn" onclick="window.location.href='songforyou.html'">← Back</button>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="tahanan.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn" title="Toggle music">♪</button>
+
+<script>
+const music = document.getElementById('bgMusic');
+const btn = document.getElementById('musicBtn');
+music.volume = 0.4;
+let playing = false;
+
+const savedTime = parseFloat(sessionStorage.getItem('musicTime') || '0');
+const wasPaused = sessionStorage.getItem('musicPaused') === 'true';
+music.currentTime = savedTime;
+
+window.addEventListener('pagehide', () => {
+    sessionStorage.setItem('musicTime', music.currentTime);
+    sessionStorage.setItem('musicPaused', !playing);
+});
+
+if (!wasPaused) {
+    music.play().then(() => {
+        playing = true;
+        btn.textContent = '♪';
+    }).catch(() => {
+        document.addEventListener('click', function startMusic() {
+            music.play();
+            playing = true;
+            btn.textContent = '♪';
+        }, { once: true });
+    });
+}
+
+btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (playing) {
+        music.pause();
+        playing = false;
+        btn.textContent = '♩';
+    } else {
+        music.play();
+        playing = true;
+        btn.textContent = '♪';
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reasons Why I Love You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #6b1424, #4a0d18);
+    font-family: Georgia, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.6rem;
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.reasons-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.reasons-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.reasons-col.left { align-items: flex-end; }
+.reasons-col.right { align-items: flex-start; }
+
+.reason-card {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: white;
+    font-size: 0.78rem;
+    font-family: 'Special Elite', cursive;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    max-width: 280px;
+    width: 100%;
+}
+
+.flower-frame {
+    background: rgba(100, 20, 20, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 18px;
+    padding: 16px;
+    width: 200px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.flower-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.nav {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.nav-btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1rem;
+    background: #fdf6e4;
+    color: #6b1424;
+    transition: .3s;
+}
+
+.nav-btn:hover { transform: translateY(-2px); }
+
+@media (max-width: 768px) {
+    h1 { font-size: 1.5rem; }
+    .reasons-layout { flex-direction: column; align-items: center; }
+    .reasons-col { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .reasons-col.left, .reasons-col.right { align-items: center; }
+    .reason-card { max-width: 160px; font-size: 0.65rem; }
+    .flower-frame { width: 130px; height: 190px; }
+}
+
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.4);
+    background: rgba(74,13,24,.75);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: transform .2s;
+    backdrop-filter: blur(4px);
+}
+.music-btn:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<h1>Reasons why i love you</h1>
+
+<div class="reasons-layout">
+
+    <div class="reasons-col left">
+        <div class="reason-card">I love you because you always know how to make me smile, even on my hardest days.</div>
+        <div class="reason-card">I love you because your love makes me feel safe, valued, and appreciated.</div>
+        <div class="reason-card">I love you because you stay patient and understanding with me.</div>
+    </div>
+
+    <div class="flower-frame">
+        <img src="tulips.png" alt="flowers">
+    </div>
+
+    <div class="reasons-col right">
+        <div class="reason-card">I love you because being with you makes my heart the happiest it has ever been.</div>
+        <div class="reason-card">I love you because you make my life brighter just by being a part of it.</div>
+        <div class="reason-card">I love you because you believe in me, even when I struggle to believe in myself.</div>
+    </div>
+
+</div>
+
+<div class="nav">
+    <button class="nav-btn" onclick="window.location.href='memory.html'">← Back</button>
+    <button class="nav-btn" onclick="window.location.href='anothermonth.html'">Next →</button>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="tahanan.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn" title="Toggle music">♪</button>
+
+<script>
+const music = document.getElementById('bgMusic');
+const btn = document.getElementById('musicBtn');
+music.volume = 0.4;
+let playing = false;
+
+const savedTime = parseFloat(sessionStorage.getItem('musicTime') || '0');
+const wasPaused = sessionStorage.getItem('musicPaused') === 'true';
+music.currentTime = savedTime;
+
+window.addEventListener('pagehide', () => {
+    sessionStorage.setItem('musicTime', music.currentTime);
+    sessionStorage.setItem('musicPaused', !playing);
+});
+
+if (!wasPaused) {
+    music.play().then(() => {
+        playing = true;
+        btn.textContent = '♪';
+    }).catch(() => {
+        document.addEventListener('click', function startMusic() {
+            music.play();
+            playing = true;
+            btn.textContent = '♪';
+        }, { once: true });
+    });
+}
+
+btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (playing) {
+        music.pause();
+        playing = false;
+        btn.textContent = '♩';
+    } else {
+        music.play();
+        playing = true;
+        btn.textContent = '♪';
+    }
+});
+</script>
+
+</body>
+</html>
